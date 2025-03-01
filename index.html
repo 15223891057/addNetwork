@@ -75,6 +75,22 @@
             }
         }
 
+
+        async function switchToCeloNetwork() {
+            try {
+                await window.ethereum.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: '0x66eee' }], // Celo 的 Chain ID
+                });
+                console.log('Switched to Celo network successfully!');
+            } catch (error) {
+                alert(1230);
+                console.error('Failed to switch network:', error);
+            }
+        }
+
+
+
     </script>
 
 </head>
@@ -83,6 +99,8 @@
 <button type="button" id="addArbSep" onclick="addNetwork();">Add Arbitrum Sepolia Network</button>
 
 <button type="button" id="switchOrAddArbSep" onclick="switchOrAddNetwork();">switch Or Add Arbitrum Sepolia Network</button>
+
+<button type="button" id="" onclick="switchToCeloNetwork();">aaa</button>
 </body>
 </html>
 
