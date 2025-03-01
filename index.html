@@ -8,58 +8,42 @@
 
         var SiteNetID = '421614';
         var SiteNetChainID = '0x66EEE';
+        var params = [{
+            chainId: SiteNetChainID,
+            chainName: 'Arbitrum Sepolia',
+            nativeCurrency: {
+                name: 'ETH',
+                symbol: 'ETH',
+                decimals: 18
+            },
+            rpcUrls: ['https://sepolia-rollup.arbitrum.io/rpc'],
+            blockExplorerUrls: ['https://sepolia.arbiscan.io/']
+        }]
 
         async function addNetwork() {
-            var params = [{
-                    chainId: SiteNetChainID,
-                    chainName: 'Arbitrum Sepolia',
-                    nativeCurrency: {
-                        name: 'ETH',
-                        symbol: 'ETH',
-                        decimals: 18
-                    },
-                    rpcUrls: ['https://sepolia-rollup.arbitrum.io/rpc'],
-                    blockExplorerUrls: ['https://sepolia.arbiscan.io/']
-                }]
-                window.ethereum.request({ method: 'wallet_addEthereumChain', params })
-                    .then(() => console.log('Success'))
-                    .catch((error) => console.log("Error", error.message));
+            window.ethereum.request({ method: 'wallet_addEthereumChain', params })
+                .then(() => console.log('Success'))
+                .catch((error) => console.log("Error", error.message));
         }
 
-    </script>
 
-
-    <script>
         async function switchOrAddNetwork() {
+            alert("111");
             try {
-                await provider // Or window.ethereum if you don't support EIP-6963.
-                    .request({
+                window.ethereum.request({
                         method: "wallet_switchEthereumChain",
-                        params: [{chainId: "0x66EEE"}],
+                        params: [{chainId: "0x66EEE"}]
                     })
             } catch (switchError) {
-                // This error code indicates that the chain has not been added to MetaMask.
+                alert(switchError.code)
                 if (switchError.code === 4902) {
-                    try {
-                        await provider // Or window.ethereum if you don't support EIP-6963.
-                            .request({
-                                method: "wallet_addEthereumChain",
-                                params: [
-                                    {
-                                        chainId: "0x66EEE",
-                                        chainName: "Arbitrum Sepolia",
-                                        rpcUrls: ['https://sepolia-rollup.arbitrum.io/rpc'],
-                                        blockExplorerUrls: ['https://sepolia.arbiscan.io/']
-                                    },
-                                ],
-                            })
-                    } catch (addError) {
-                        // Handle "add" error.
-                    }
+                    window.ethereum.request({method: "wallet_addEthereumChain",params})
+                        .then(() => console.log('Success'))
+                        .catch((error) => console.log("Error", error.message));
                 }
-                // Handle other "switch" errors.
             }
         }
+
     </script>
 
 </head>
