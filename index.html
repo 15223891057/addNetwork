@@ -20,15 +20,14 @@
             blockExplorerUrls: ['https://sepolia.arbiscan.io/']
         }]
 
-        async function addNetwork() {
-            window.ethereum.request({ method: 'wallet_addEthereumChain', params })
-                .then(() => console.log('Success'))
-                .catch((error) => console.log("Error", error.message));
-        }
+        // async function addNetwork() {
+        //     window.ethereum.request({ method: 'wallet_addEthereumChain', params })
+        //         .then(() => console.log('Success'))
+        //         .catch((error) => console.log("Error", error.message));
+        // }
 
 
         async function switchOrAddNetwork() {
-            alert("111");
             try {
                 await window.ethereum.request({
                         method: "wallet_switchEthereumChain",
@@ -42,53 +41,7 @@
                         .catch((error) => console.log("Error", error.message));
                 }
             }
-            // try {
-            //     await provider // Or window.ethereum if you don't support EIP-6963.
-            //         .request({
-            //             method: "wallet_switchEthereumChain",
-            //             params: [{ chainId: "0x66EEE" }],
-            //         })
-            // } catch (switchError) {
-            //     // This error code indicates that the chain has not been added to MetaMask.
-            //     if (switchError.code === 4902) {
-            //         try {
-            //             await provider // Or window.ethereum if you don't support EIP-6963.
-            //                 .request({
-            //                     method: "wallet_addEthereumChain",
-            //                     params: [{
-            //                         chainId: SiteNetChainID,
-            //                         chainName: 'Arbitrum Sepolia',
-            //                         nativeCurrency: {
-            //                             name: 'ETH',
-            //                             symbol: 'ETH',
-            //                             decimals: 18
-            //                         },
-            //                         rpcUrls: ['https://sepolia-rollup.arbitrum.io/rpc'],
-            //                         blockExplorerUrls: ['https://sepolia.arbiscan.io/']
-            //                     }],
-            //                 })
-            //         } catch (addError) {
-            //             // Handle "add" error.
-            //         }
-            //     }
-            //     // Handle other "switch" errors.
-            // }
         }
-
-
-        async function switchToCeloNetwork() {
-            try {
-                await window.ethereum.request({
-                    method: 'wallet_switchEthereumChain',
-                    params: [{ chainId: '0x66eee' }], // Celo 的 Chain ID
-                });
-                console.log('Switched to Celo network successfully!');
-            } catch (error) {
-                alert(1230);
-                console.error('Failed to switch network:', error);
-            }
-        }
-
 
 
     </script>
@@ -96,11 +49,9 @@
 </head>
 <body>
 <h1>MetaMask 自定义网络添加示例</h1>
-<button type="button" id="addArbSep" onclick="addNetwork();">Add Arbitrum Sepolia Network</button>
 
 <button type="button" id="switchOrAddArbSep" onclick="switchOrAddNetwork();">switch Or Add Arbitrum Sepolia Network</button>
 
-<button type="button" id="" onclick="switchToCeloNetwork();">aaa</button>
 </body>
 </html>
 
