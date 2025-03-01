@@ -34,7 +34,6 @@
                         params: [{chainId: "0x66EEE"}]
                     })
             } catch (switchError) {
-                alert(switchError.code)
                 if (switchError.code === 4902) {
                     await window.ethereum.request({method: "wallet_addEthereumChain",params})
                         .then(() => console.log('Success'))
