@@ -4,89 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MetaMask Network Example</title>
-<!--    <script>-->
-
-<!--        var SiteNetID = '421614';-->
-<!--        var SiteNetChainID = '0x66EEE';-->
-
-<!--        async function addNetwork() {-->
-<!--            var params = [{-->
-<!--                    chainId: SiteNetChainID,-->
-<!--                    chainName: 'Arbitrum Sepolia',-->
-<!--                    nativeCurrency: {-->
-<!--                        name: 'ETH',-->
-<!--                        symbol: 'ETH',-->
-<!--                        decimals: 18-->
-<!--                    },-->
-<!--                    rpcUrls: ['https://sepolia-rollup.arbitrum.io/rpc'],-->
-<!--                    blockExplorerUrls: ['https://sepolia.arbiscan.io/']-->
-<!--                }]-->
-<!--                window.ethereum.request({ method: 'wallet_addEthereumChain', params })-->
-<!--                    .then(() => console.log('Success'))-->
-<!--                    .catch((error) => console.log("Error", error.message));-->
-<!--        }-->
-
-<!--    </script>-->
-
     <script>
 
-
-        var eth;
-        var isTestnet = 'true';
         var SiteNetID = '421614';
         var SiteNetChainID = '0x66EEE';
-        var SiteNetName = 'Arbitrum Sepolia Mainnet';
-        var allowErc1155 = 'True';
 
-        async function addNetwork(type) {
-
-            if (type === 'web3') {
-                if (typeof ethereum !== 'undefined') {
-                    eth = new Web3(ethereum);
-                } else if (typeof web3 !== 'undefined') {
-                    eth = new Web3(web3.givenProvider);
-                } else {
-                    eth = new Web3(ethereum);
-                }
-            }
-
-            if (typeof eth !== 'undefined') {
-                var network = 0;
-                network = await eth.eth.net.getId();
-                netID = network.toString();
-                var params;
-                if (netID == SiteNetID) {
-                    alert("Arbitrum Sepolia Network has already been added to Metamask.");
-                    return;
-                } else {
-                    params = [{
-                        chainId: SiteNetChainID,
-                        chainName: 'Arbitrum Sepolia Mainnet',
-                        nativeCurrency: {
-                            name: 'ETH',
-                            symbol: 'ETH',
-                            decimals: 18
-                        },
-                        rpcUrls: ['https://sepolia-rollup.arbitrum.io/rpc'],
-                        blockExplorerUrls: ['https://sepolia.arbiscan.io/']
-                    }]
-                }
-
+        async function addNetwork() {
+            var params = [{
+                    chainId: SiteNetChainID,
+                    chainName: 'Arbitrum Sepolia',
+                    nativeCurrency: {
+                        name: 'ETH',
+                        symbol: 'ETH',
+                        decimals: 18
+                    },
+                    rpcUrls: ['https://sepolia-rollup.arbitrum.io/rpc'],
+                    blockExplorerUrls: ['https://sepolia.arbiscan.io/']
+                }]
                 window.ethereum.request({ method: 'wallet_addEthereumChain', params })
                     .then(() => console.log('Success'))
                     .catch((error) => console.log("Error", error.message));
-            } else {
-                alert('Unable to locate a compatible web3 browser!');
-            }
         }
 
-
-
     </script>
+
 </head>
 <body>
 <h1>MetaMask 自定义网络添加示例</h1>
-<button type="button" class="btn btn-sm btn-secondary" onclick="addNetwork('web3');">Add Arbitrum Sepolia Network</button>
+<button type="button" id="arbsep" onclick="addNetwork('web3');">Add Arbitrum Sepolia Network</button>
 </body>
 </html>
 
