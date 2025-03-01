@@ -28,10 +28,46 @@
 
     </script>
 
+
+    <script>
+        async function switchOrAddNetwork() {
+            try {
+                await provider // Or window.ethereum if you don't support EIP-6963.
+                    .request({
+                        method: "wallet_switchEthereumChain",
+                        params: [{chainId: "0x66EEE"}],
+                    })
+            } catch (switchError) {
+                // This error code indicates that the chain has not been added to MetaMask.
+                if (switchError.code === 4902) {
+                    try {
+                        await provider // Or window.ethereum if you don't support EIP-6963.
+                            .request({
+                                method: "wallet_addEthereumChain",
+                                params: [
+                                    {
+                                        chainId: "0x66EEE",
+                                        chainName: "Arbitrum Sepolia",
+                                        rpcUrls: ['https://sepolia-rollup.arbitrum.io/rpc'],
+                                        blockExplorerUrls: ['https://sepolia.arbiscan.io/']
+                                    },
+                                ],
+                            })
+                    } catch (addError) {
+                        // Handle "add" error.
+                    }
+                }
+                // Handle other "switch" errors.
+            }
+        }
+    </script>
+
 </head>
 <body>
 <h1>MetaMask 自定义网络添加示例</h1>
-<button type="button" id="arbsep" onclick="addNetwork('web3');">Add Arbitrum Sepolia Network</button>
+<button type="button" id="addArbSep" onclick="addNetwork();">Add Arbitrum Sepolia Network</button>
+
+<button type="button" id="switchOrAddArbSep" onclick="switchOrAddNetwork();">switch Or Add Arbitrum Sepolia Network</button>
 </body>
 </html>
 
