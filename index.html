@@ -6,7 +6,7 @@
     <title>MetaMask Network Example</title>
     <script>
 
-        async function doWallet(params){
+        async function doWallet(params,SiteNetChainID){
             try {
                 await window.ethereum.request({
                     method: "wallet_switchEthereumChain",
@@ -37,7 +37,7 @@
                 blockExplorerUrls: ['https://sepolia.arbiscan.io/']
             }]
 
-            doWallet(params);
+            await doWallet(params, SiteNetChainID);
         }
 
 
@@ -57,7 +57,7 @@
                 blockExplorerUrls: ['https://testnet.explorer.hemi.xyz']
             }]
 
-            doWallet(params);
+            await doWallet(params, SiteNetChainID);
         }
 
 
