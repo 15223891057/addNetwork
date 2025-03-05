@@ -6,33 +6,12 @@
     <title>MetaMask Network Example</title>
     <script>
 
-        var SiteNetID = '421614';
-        var SiteNetChainID = '0x66EEE';
-        var params = [{
-            chainId: SiteNetChainID,
-            chainName: 'Arbitrum Sepolia',
-            nativeCurrency: {
-                name: 'ETH',
-                symbol: 'ETH',
-                decimals: 18
-            },
-            rpcUrls: ['https://sepolia-rollup.arbitrum.io/rpc'],
-            blockExplorerUrls: ['https://sepolia.arbiscan.io/']
-        }]
-
-        // async function addNetwork() {
-        //     window.ethereum.request({ method: 'wallet_addEthereumChain', params })
-        //         .then(() => console.log('Success'))
-        //         .catch((error) => console.log("Error", error.message));
-        // }
-
-
-        async function switchOrAddNetwork() {
+        async function doWallet(params){
             try {
                 await window.ethereum.request({
-                        method: "wallet_switchEthereumChain",
-                        params: [{chainId: "0x66EEE"}]
-                    })
+                    method: "wallet_switchEthereumChain",
+                    params: [{chainId: SiteNetChainID}]
+                })
             } catch (switchError) {
                 if (switchError.code === 4902) {
                     await window.ethereum.request({method: "wallet_addEthereumChain",params})
@@ -42,6 +21,45 @@
             }
         }
 
+        async function switchOrAddArbSep() {
+
+            var SiteNetID = '421614';
+            var SiteNetChainID = '0x66EEE';
+            var params = [{
+                chainId: SiteNetChainID,
+                chainName: 'Arbitrum Sepolia',
+                nativeCurrency: {
+                    name: 'ETH',
+                    symbol: 'ETH',
+                    decimals: 18
+                },
+                rpcUrls: ['https://sepolia-rollup.arbitrum.io/rpc'],
+                blockExplorerUrls: ['https://sepolia.arbiscan.io/']
+            }]
+
+            doWallet(params);
+        }
+
+
+        async function switchOrAddHemiSep() {
+
+            var SiteNetID = '743111';
+            var SiteNetChainID = '0xB56C7';
+            var params = [{
+                chainId: SiteNetChainID,
+                chainName: 'Hemi Sepolia',
+                nativeCurrency: {
+                    name: 'ETH',
+                    symbol: 'ETH',
+                    decimals: 18
+                },
+                rpcUrls: ['https://testnet.rpc.hemi.network/rpc'],
+                blockExplorerUrls: ['https://testnet.explorer.hemi.xyz']
+            }]
+
+            doWallet(params);
+        }
+
 
     </script>
 
@@ -49,7 +67,10 @@
 <body>
 <h1>MetaMask 自定义网络添加示例</h1>
 
-<button type="button" id="switchOrAddArbSep" onclick="switchOrAddNetwork();">switch Or Add Arbitrum Sepolia Network</button>
+<button type="button" id="switchOrAddArbSep" onclick="switchOrAddArbSep();">switch Or Add Arbitrum Sepolia Network</button>
+
+
+<button type="button" id="switchOrAddHemiSep" onclick="switchOrAddHemiSep();">switch Or Add Hemi Sepolia Network</button>
 
 </body>
 </html>
