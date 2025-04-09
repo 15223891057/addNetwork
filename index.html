@@ -61,6 +61,26 @@
         }
 
 
+        async function switchOrAddIncentivTestnet() {
+
+            var SiteNetID = '11690';
+            var SiteNetChainID = '2DAA';
+            var params = [{
+                chainId: SiteNetChainID,
+                chainName: 'Incentiv Testnet',
+                nativeCurrency: {
+                    name: 'TCENT',
+                    symbol: 'TCENT',
+                    decimals: 18
+                },
+                rpcUrls: ['https://rpc.testnet.incentiv.net/'],
+                blockExplorerUrls: ['']
+            }]
+
+            await doWallet(params, SiteNetChainID);
+        }
+
+
     </script>
 
 </head>
@@ -71,6 +91,9 @@
 
 
 <button type="button" id="switchOrAddHemiSep" onclick="switchOrAddHemiSep();">switch Or Add Hemi Sepolia Network</button>
+
+
+<button type="button" id="switchOrAddIncentivTestnet" onclick="switchOrAddIncentivTestnet();">switch Or Add Hemi Incentiv Testnet</button>
 
 </body>
 </html>
