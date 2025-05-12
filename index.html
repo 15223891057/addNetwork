@@ -80,6 +80,25 @@
             await doWallet(params, SiteNetChainID);
         }
 
+        async function switchOrAddOPMainnet() {
+
+            var SiteNetID = '10';
+            var SiteNetChainID = '0xA';
+            var params = [{
+                chainId: SiteNetChainID,
+                chainName: 'OP Mainnet',
+                nativeCurrency: {
+                    name: 'ETH',
+                    symbol: 'ETH',
+                    decimals: 18
+                },
+                rpcUrls: ['https://optimism-mainnet.infura.io'],
+                blockExplorerUrls: ['https://optimistic.etherscan.io']
+            }]
+
+            await doWallet(params, SiteNetChainID);
+        }
+
 
     </script>
 
@@ -94,6 +113,9 @@
 
 
 <button type="button" id="switchOrAddIncentivTestnet" onclick="switchOrAddIncentivTestnet();">switch Or Add Hemi Incentiv Testnet</button>
+
+
+<button type="button" id="switchOrAddOPMainnet" onclick="switchOrAddOPMainnet();">switch Or Add Hemi Incentiv Testnet</button>
 
 </body>
 </html>
