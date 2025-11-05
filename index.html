@@ -118,6 +118,25 @@
             await doWallet(params, SiteNetChainID);
         }
 
+        async function switchOrAddNeuraTestnet() {
+
+            var SiteNetID = '267';
+            var SiteNetChainID = '10B';
+            var params = [{
+                chainId: SiteNetChainID,
+                chainName: 'Neura Testnet',
+                nativeCurrency: {
+                    name: 'ANKR',
+                    symbol: 'ANKR',
+                    decimals: 18
+                },
+                rpcUrls: ['https://testnet.rpc.neuraprotocol.io'],
+                blockExplorerUrls: ['https://testnet-blockscout.infra.neuraprotocol.io']
+            }]
+
+            await doWallet(params, SiteNetChainID);
+        }
+
 
     </script>
 
@@ -138,6 +157,9 @@
 
 
 <button type="button" id="switchOrAddBaseSep" onclick="switchOrAddBaseSep();">switch Or Add Base Sepolia Network</button>
+
+
+<button type="button" id="switchOrAddNeuraTestnet" onclick="switchOrAddNeuraTestnet();">switch Or Add Neura Testnet Network</button>
 
 
 <button type="button" id="" onclick="">=====================================</button>
